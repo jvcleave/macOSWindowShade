@@ -1,21 +1,25 @@
 # macOSWindowShade
 
-`WindowShade` is a small Swift package that brings the classic “roll up to the
-title bar” interaction to modern macOS windows while retaining the native title
-bar and traffic-light controls.
+This repository contains two related products:
 
-Double-click the title bar to shade or restore the window. A shaded window stays
-draggable, and restoring it opens the original window beneath its new location.
+- `WindowShadeExample/` is the macOS SwiftUI reference app.
+- `Packages/WindowShade/` is the reusable Swift package.
+
+`WindowShade` brings the classic “roll up to the title bar” interaction to
+modern macOS windows while retaining the native title bar and traffic-light
+controls. Double-click the title bar to shade or restore the window. A shaded
+window stays draggable, and restoring it opens the original window beneath its
+new location.
 
 ## Requirements
 
 - macOS 14 or later
 - Swift 6.2 or later
 
-## Add the package
+## WindowShade package
 
-In Xcode, choose **File > Add Package Dependencies…** and use this repository's
-URL. Add the `WindowShade` product to your macOS app target.
+Add `Packages/WindowShade` as a local package dependency and link the
+`WindowShade` product to your macOS app target.
 
 Wrap the content of the window and retain a controller in SwiftUI state:
 
@@ -46,14 +50,29 @@ removes the content's height while shaded. Use `setShaded(_:)` when you need an
 explicit state instead of a toggle. AppKit clients can call `attachWindow(_:)`
 directly.
 
-## Example app
+## Reference app
 
-Open `Package.swift` in Xcode, select the `WindowShadeExample` scheme, and run
-it. You can also launch it from Terminal:
+Open `WindowShadeExample.xcodeproj`, select the `WindowShadeExample` scheme,
+and run it. The app links `Packages/WindowShade` as a local package dependency.
+
+## Verification
+
+Run package tests from the repository root:
 
 ```sh
-swift run WindowShadeExample
+swift test --package-path Packages/WindowShade
 ```
 
-The example supports both title-bar double-clicking and a **Shade Window**
-button. The package's tests can be run with `swift test`.
+Build the reference app from the repository root:
+
+```sh
+xcodebuild -project WindowShadeExample.xcodeproj \
+    -scheme WindowShadeExample \
+    -destination 'platform=macOS' \
+    build
+```
+
+Because the package manifest is nested to keep the reference app and package
+cleanly separated, this combined repository is intended for local package use.
+Publishing `WindowShade` as a remote Swift package requires a repository or tag
+whose root contains the package manifest.

@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "macOSWindowShade",
+    name: "WindowShade",
     platforms: [
         .macOS(.v14)
     ],
@@ -11,19 +11,10 @@ let package = Package(
         .library(
             name: "WindowShade",
             targets: ["WindowShade"]
-        ),
-        .executable(
-            name: "WindowShadeExample",
-            targets: ["WindowShadeExample"]
         )
     ],
     targets: [
         .target(name: "WindowShade"),
-        .executableTarget(
-            name: "WindowShadeExample",
-            dependencies: ["WindowShade"],
-            path: "Examples/WindowShadeExample"
-        ),
         .testTarget(
             name: "WindowShadeTests",
             dependencies: ["WindowShade"]

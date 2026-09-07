@@ -1,17 +1,7 @@
 import SwiftUI
 import WindowShade
 
-@main
-struct WindowShadeExampleApp: App {
-    var body: some Scene {
-        WindowGroup("Window Shade Example") {
-            WindowShadeExampleView()
-        }
-        .defaultSize(width: 520, height: 360)
-    }
-}
-
-private struct WindowShadeExampleView: View {
+struct ContentView: View {
     @State private var shadeController = WindowShadeController()
 
     var body: some View {
