@@ -11,6 +11,10 @@ controls. Double-click the title bar to shade or restore the window. A shaded
 window stays draggable, and restoring it opens the original window beneath its
 new location.
 
+## Demo
+
+![WindowShade example collapsing to its title bar and restoring](Media/window-shade-demo.gif)
+
 ## Requirements
 
 - macOS 14 or later
